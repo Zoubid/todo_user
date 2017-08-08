@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+		<record id="view_form_todo_task_inherited" model="ir.ui.view">
+			<field name="name">Todo Task form - Userextension</field>
+			<field name ="model">toddo.task</field>
+			<field name="inherit_id" ref="todo-app.view_from_todo_task"/>
+			<field name="arch" type="xml">
+				<field name ="name" position="after">
+					<field name="user_id"/>
+				</field>
+				<field name="is_done" position="before">
+					<field name="date_deadline"/>
+				</field>
+				<field name = "name" position="attributes">
+					<attribute name="string">I have to ....
+					</attribute>
+				</field>
+				
+			</field>
+		</record>
+	</data>
+</openerp>
