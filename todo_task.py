@@ -15,6 +15,8 @@ class TodoTask(models.Model):
 		domain = [('is_done','=',True),'|',
 		('user_id','=',self.env.uid),
 		('user_id','=',False)]
+		done_recs = self.search(domain)
+		done_recs.write({'active': False})
 
 		return True
 
