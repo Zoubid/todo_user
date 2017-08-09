@@ -2,8 +2,8 @@
 from openerp import models, fields, api
 
 class TodoTask(models.Model):
-	_inherit = 'toddo.task'
-	
+	_inherit = ['toddo.task' ,'mail.thread']	
+
 	name = fields.Char(help="What needs to be done?")
 	user_id =fields.Many2one('res.users','Responsible')
 	date_deadline = fields.Date('Deadline')
@@ -13,6 +13,7 @@ class TodoTask(models.Model):
 		domain = [('is_done','=',True),'|',
 		('user_id','=',self.env.uid),
 		('user_id','=',False)]
+		return True
 
 	@api.one 
 	def do_toggle_done(self):
