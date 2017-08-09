@@ -2,6 +2,7 @@
 from openerp import models, fields, api
 
 class TodoTask(models.Model):
+	_name = 'toddo.task'
 	_inherit = ['toddo.task' ,'mail.thread']	
 
 	name = fields.Char(help="What needs to be done?")
@@ -10,9 +11,11 @@ class TodoTask(models.Model):
 
 	@api.multi
 	def do_clear_done(self):
+
 		domain = [('is_done','=',True),'|',
 		('user_id','=',self.env.uid),
 		('user_id','=',False)]
+
 		return True
 
 	@api.one 
@@ -20,5 +23,5 @@ class TodoTask(models.Model):
 		if self.user_id !=self.env.user:
 			raise Exception('Only the responsible can do this!')
 		else:
-			return super(TodoTask, self) .do_toggle_done()
+			return super(TodoTask, self).do_toggle_done()
 			
